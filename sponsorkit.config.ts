@@ -1,20 +1,12 @@
 import { defineConfig, presets } from 'sponsorkit';
+import { genSpecialSponsorShips } from './special-sponsors';
 
 export default defineConfig({
   tiers: [
     {
       title: 'Past Sponsors',
       monthlyDollars: -1,
-      preset: {
-        avatar: {
-          size: 20,
-        },
-        boxWidth: 22,
-        boxHeight: 22,
-        container: {
-          sidePadding: 35,
-        },
-      },
+      preset: presets.xs
     },
     {
       title: 'Backers',
@@ -23,16 +15,7 @@ export default defineConfig({
     {
       title: 'Sponsors',
       monthlyDollars: 5,
-      preset: {
-        avatar: {
-          size: 42,
-        },
-        boxWidth: 52,
-        boxHeight: 52,
-        container: {
-          sidePadding: 30,
-        },
-      },
+      preset: presets.base,
     },
     {
       title: 'Silver Sponsors',
@@ -52,6 +35,6 @@ export default defineConfig({
   ],
 
   async onSponsorsReady(allSponsorShips) {
-    return [...allSponsorShips];
-  },
+    return [...allSponsorShips, ...await genSpecialSponsorShips()]
+  }
 });
