@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "sponsorkit": "^0.8.5",
-    "rimraf": "5.0.1"
+    "rimraf": "5.0.1",
+    "sponsorkit": "^0.8.9"
   }
 }

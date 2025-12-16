@@ -6,7 +6,7 @@ export default defineConfig({
     {
       title: 'Past Sponsors',
       monthlyDollars: -1,
-      preset: presets.xs
+      preset: presets.xs,
     },
     {
       title: 'Backers',
@@ -14,12 +14,12 @@ export default defineConfig({
     },
     {
       title: 'Sponsors',
-      monthlyDollars: 5,
+      monthlyDollars: 10,
       preset: presets.base,
     },
     {
       title: 'Silver Sponsors',
-      monthlyDollars: 25,
+      monthlyDollars: 20,
       preset: presets.medium,
     },
     {
@@ -29,12 +29,18 @@ export default defineConfig({
     },
     {
       title: 'Platinum Sponsors',
-      monthlyDollars: 200,
+      monthlyDollars: 100,
       preset: presets.xl,
     },
   ],
 
   async onSponsorsReady(allSponsorShips) {
-    return [...allSponsorShips, ...await genSpecialSponsorShips()]
-  }
+    return [
+      ...allSponsorShips.map((ship) => ({
+        ...ship,
+        monthlyDollars: Number(ship.raw.all_sum_amount),
+      })),
+      ...(await genSpecialSponsorShips()),
+    ];
+  },
 });
